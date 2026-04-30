@@ -25,7 +25,18 @@
     videoRoot.classList.add("scroll-video-root--fallback");
   }
 
-  video.addEventListener("error", enableFallback);
+  var noSource =
+    typeof HTMLMediaElement !== "undefined"
+      ? HTMLMediaElement.NETWORK_NO_SOURCE
+      : 3;
+
+  video.addEventListener("error", function () {
+    requestAnimationFrame(function () {
+      if (video.networkState === noSource) {
+        enableFallback();
+      }
+    });
+  });
 
   if (reduceMotion) {
     videoRoot.classList.add("scroll-video-root--reduced");
@@ -78,6 +89,11 @@
   } else {
     video.addEventListener("loadedmetadata", onReady);
   }
+
+  video.addEventListener("loadeddata", function () {
+    video.pause();
+    applyTimeFromScroll();
+  });
 
   window.addEventListener("scroll", onScrollOrResize, { passive: true });
   window.addEventListener("resize", onScrollOrResize, { passive: true });
