@@ -1065,30 +1065,11 @@ a:hover {
   font-size: 0.95rem;
 }
 
-.site-footer {
+.ask-footer-notes {
+  margin-top: 2.25rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--glass-border);
-  padding: 2rem 1.25rem;
-  background: rgba(5, 8, 12, 0.55);
-  backdrop-filter: blur(16px) saturate(1.1);
-  -webkit-backdrop-filter: blur(16px) saturate(1.1);
-}
-
-.footer-inner {
   text-align: center;
-}
-
-.footer-brand {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 0.75rem;
-}
-
-.footer-logo {
-  height: 40px;
-  width: auto;
-  max-width: min(240px, 100%);
-  object-fit: contain;
-  opacity: 0.95;
 }
 
 .footer-tagline {
@@ -1097,15 +1078,20 @@ a:hover {
   color: var(--text-muted);
 }
 
-.footer-inner p {
-  margin: 0.25rem 0;
-  font-size: 0.9rem;
+.footer-meta {
+  margin: 0;
+  font-size: 0.8rem !important;
+  opacity: 0.85;
   color: var(--text-muted);
 }
 
-.footer-meta {
-  font-size: 0.8rem !important;
-  opacity: 0.85;
+.scroll-tail {
+  min-height: min(110vh, 960px);
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  pointer-events: none;
 }
 
 @media (max-width: 900px) {
