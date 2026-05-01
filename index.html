@@ -10,12 +10,14 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://www.google.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Sora:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/png" href="assets/alienade-logo.png" />
+    <link rel="icon" type="image/png" href="assets/pngs/alienade_logo_alpha.png" />
   </head>
   <body>
     <div class="scroll-video-root" aria-hidden="true">
@@ -43,10 +45,10 @@
         <a class="logo" href="#top" aria-label="Alienade home">
           <img
             class="logo-img"
-            src="assets/alienade-logo.png"
+            src="assets/pngs/alienade_logo_alpha.png"
             alt=""
             width="200"
-            height="56"
+            height="67"
             decoding="async"
           />
         </a>
@@ -76,10 +78,10 @@
             <h1 class="hero-title">
               <img
                 class="hero-logo"
-                src="assets/alienade-logo.png"
+                src="assets/pngs/alienade_logo_alpha.png"
                 alt="Alienade"
                 width="480"
-                height="132"
+                height="160"
                 decoding="async"
               />
               <span class="hero-tag">Not for humans.</span>
@@ -96,9 +98,9 @@
           </div>
           <div class="hero-visual">
             <img
-              src="assets/alienade-can-alpha.png"
-              width="400"
-              height="560"
+              src="assets/pngs/alienadeCAN-alpha.png"
+              width="1680"
+              height="937"
               alt="Alienade lemon-lime soda can with alien character and Not For Humans tagline"
               class="hero-can"
               loading="eager"
@@ -130,56 +132,34 @@
         <div class="container">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/brand-film.png"
+              src="assets/pngs/brandfilm-alpha.png"
               alt="Brand film"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />
           </h2>
-          <p class="section-lead center">
-            Master animation for Alienade: space arrival, product reveal, and tagline. This cut becomes the
-            full-site background (scrubbed with scroll). Web playback uses
-            <code class="inline-code">assets/alienade-scroll-bg.mp4</code> (H.264 remux from the master
-            <code class="inline-code">.mov</code>).
-          </p>
-          <ol class="film-beats">
-            <li>
-              <span class="film-beat-title">Deep space</span>
-              <span class="film-beat-desc">Establish stars / depth; slow drift or subtle parallax.</span>
-            </li>
-            <li>
-              <span class="film-beat-title">UFO entrance</span>
-              <span class="film-beat-desc">Ship enters frame; silhouette or rim light reads at small sizes.</span>
-            </li>
-            <li>
-              <span class="film-beat-title">Beam &amp; drop</span>
-              <span class="film-beat-desc">Tractor beam; can resolves in the light (match pack art / alpha can).</span>
-            </li>
-            <li>
-              <span class="film-beat-title">Floating hero</span>
-              <span class="film-beat-desc">Can suspended, condensation/bounce; hero beauty beat for cutdowns.</span>
-            </li>
-            <li>
-              <span class="film-beat-title">Alien hand</span>
-              <span class="film-beat-desc">Hand enters, grabs can &mdash; payoff beat before title.</span>
-            </li>
-            <li>
-              <span class="film-beat-title">Not for humans</span>
-              <span class="film-beat-desc">Full-frame title; typography aligned with can (pink / yellow energy).</span>
-            </li>
-          </ol>
-          <div class="film-notes card">
-            <h3 class="film-notes-title">Export &amp; web</h3>
-            <ul class="film-notes-list">
-              <li><strong>Duration:</strong> about 15&ndash;25s total keeps file size sane for mobile scroll.</li>
-              <li><strong>Framing:</strong> keep the UFO, beam, and can in the <strong>center 70%</strong>; edges darken under the site scrim.</li>
-              <li><strong>End card:</strong> hold &ldquo;NOT FOR HUMANS&rdquo; long enough to read on mute (~1.5&ndash;3s).</li>
-              <li><strong>Deliverables:</strong> H.264 <code class="inline-code">.mp4</code> + VP9/AV1 <code class="inline-code">.webm</code>; 1920&times;1080 minimum, 4K optional.</li>
-            </ul>
+          <div class="film-embed">
+            <div id="film-youtube-player" class="film-embed__player"></div>
+            <noscript>
+              <iframe
+                class="film-embed__iframe-ns"
+                src="https://www.youtube.com/embed/tqQAJwpsIec?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=tqQAJwpsIec&amp;playsinline=1&amp;rel=0&amp;modestbranding=1"
+                title="Alienade brand film"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                allowfullscreen
+              ></iframe>
+            </noscript>
           </div>
+          <p class="film-embed-fallback-msg" id="film-youtube-fallback-msg" hidden>
+            If the player does not load, open the
+            <a href="https://www.youtube.com/watch?v=tqQAJwpsIec" target="_blank" rel="noopener noreferrer"
+              >brand film on YouTube</a
+            >. Serve this page over <strong>http://</strong> or <strong>https://</strong> (not the raw file path)
+            so the embed can run.
+          </p>
         </div>
       </section>
 
@@ -187,11 +167,11 @@
         <div class="container narrow">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/the-thesis.png"
+              src="assets/pngs/thethesis-alpha.png"
               alt="The thesis"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />
@@ -222,11 +202,11 @@
         <div class="container">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/the-product.png"
+              src="assets/pngs/theproduct-alpha.png"
               alt="The product"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />
@@ -268,11 +248,11 @@
         <div class="container">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/unfair-advantage.png"
+              src="assets/pngs/unfairAdvantage-alpha.png"
               alt="Unfair advantage"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />
@@ -298,11 +278,11 @@
         <div class="container">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/market-positioning.png"
+              src="assets/pngs/marketPositioning-alpha.png"
               alt="Market and positioning"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />
@@ -357,11 +337,11 @@
         <div class="container">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/go-to-market.png"
+              src="assets/pngs/gotoMarket-alpha.png"
               alt="Go-to-market"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />
@@ -402,11 +382,11 @@
         <div class="container narrow">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/marketing-engine.png"
+              src="assets/pngs/marketengine-alpha.png"
               alt="Marketing engine"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />
@@ -438,7 +418,7 @@
             </li>
           </ul>
           <p class="partner-note">
-            Deck language: partners operational and contracted; scaling from day one.
+            Partners operational and contracted; scaling from day one.
           </p>
         </div>
       </section>
@@ -447,11 +427,11 @@
         <div class="container">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/team.png"
+              src="assets/pngs/team-alpha.png"
               alt="Team"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />
@@ -497,11 +477,11 @@
         <div class="container">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/unit-economics.png"
+              src="assets/pngs/uniteconomics-alpha.png"
               alt="Unit economics and model"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />
@@ -588,11 +568,11 @@
         <div class="container narrow">
           <h2 class="section-title section-title--graphic">
             <img
-              src="assets/headers/the-ask.png"
+              src="assets/pngs/theask-alpha.png"
               alt="The ask"
               class="section-title-img"
               width="720"
-              height="140"
+              height="240"
               loading="lazy"
               decoding="async"
             />

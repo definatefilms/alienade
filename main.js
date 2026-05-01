@@ -98,3 +98,111 @@
   window.addEventListener("scroll", onScrollOrResize, { passive: true });
   window.addEventListener("resize", onScrollOrResize, { passive: true });
 })();
+
+(function () {
+  var filmMount = document.getElementById("film-youtube-player");
+  if (!filmMount) return;
+
+  var fallbackEl = document.getElementById("film-youtube-fallback-msg");
+  var reducedMotion =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function showHostHint() {
+    if (fallbackEl) fallbackEl.hidden = false;
+  }
+
+  if (window.location.protocol === "file:") {
+    showHostHint();
+  }
+
+  var apiTimer;
+  var usedFallback = false;
+
+  function injectIframeFallback() {
+    if (usedFallback) return;
+    usedFallback = true;
+    if (apiTimer) window.clearTimeout(apiTimer);
+
+    var autoplay = reducedMotion ? "0" : "1";
+    filmMount.innerHTML =
+      '<iframe src="https://www.youtube.com/embed/tqQAJwpsIec?autoplay=' +
+      autoplay +
+      '&mute=1&loop=1&playlist=tqQAJwpsIec&playsinline=1&rel=0&modestbranding=1" title="Alienade brand film" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen loading="eager"></iframe>';
+    var iframe = filmMount.querySelector("iframe");
+    if (iframe) {
+      iframe.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0";
+    }
+  }
+
+  function playerOrigin() {
+    if (
+      window.location.protocol === "file:" ||
+      !window.location.origin ||
+      window.location.origin === "null"
+    ) {
+      return undefined;
+    }
+    return window.location.origin;
+  }
+
+  function initPlayer() {
+    if (typeof YT === "undefined" || !YT.Player) {
+      injectIframeFallback();
+      return;
+    }
+    try {
+      var vars = {
+        autoplay: reducedMotion ? 0 : 1,
+        mute: 1,
+        loop: 1,
+        playlist: "tqQAJwpsIec",
+        playsinline: 1,
+        modestbranding: 1,
+        rel: 0,
+      };
+      var o = playerOrigin();
+      if (o) vars.origin = o;
+
+      new YT.Player("film-youtube-player", {
+        videoId: "tqQAJwpsIec",
+        width: "100%",
+        height: "100%",
+        playerVars: vars,
+        events: {
+          onReady: function (ev) {
+            if (apiTimer) window.clearTimeout(apiTimer);
+            try {
+              ev.target.mute();
+              if (!reducedMotion) ev.target.playVideo();
+            } catch (err) {
+              /* ignore */
+            }
+          },
+          onError: function () {
+            injectIframeFallback();
+          },
+        },
+      });
+    } catch (e) {
+      injectIframeFallback();
+    }
+  }
+
+  window.onYouTubeIframeAPIReady = function () {
+    initPlayer();
+  };
+
+  var tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  tag.async = true;
+  tag.onerror = function () {
+    injectIframeFallback();
+  };
+  document.head.appendChild(tag);
+
+  apiTimer = window.setTimeout(function () {
+    if (typeof YT === "undefined") {
+      injectIframeFallback();
+    }
+  }, 12000);
+})();
