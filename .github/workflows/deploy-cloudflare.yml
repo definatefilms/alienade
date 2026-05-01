@@ -1,19 +1,10 @@
 # Deploys on every push to main — no Cloudflare “Git webhook” required.
 #
-# One-time setup (GitHub → repo → Settings → Secrets and variables → Actions):
-#
-#   CLOUDFLARE_API_TOKEN (required)
-#     Dashboard → My Profile → API Tokens → “Edit Cloudflare Workers” (or Workers Scripts Write).
-#
-#   CLOUDFLARE_ACCOUNT_ID (required for CI — fixes “exit code 1” / ambiguous account)
-#     Dashboard → Workers & Pages → Workers tab → overview, or any zone → right rail “Account ID”.
-#
-# Node on Actions: opt into Node 24 for JS-based actions (see GitHub deprecation of Node 20).
+# GitHub → Settings → Secrets and variables → Actions:
+#   CLOUDFLARE_API_TOKEN — Dashboard → My Profile → API Tokens (“Edit Cloudflare Workers”).
+#   CLOUDFLARE_ACCOUNT_ID — Dashboard → Workers & Pages or any zone → Account ID (sidebar).
 
 name: Deploy to Cloudflare Workers
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   push:
@@ -32,9 +23,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Deploy worker (static assets)
-        uses: cloudflare/wrangler-action@v3.15.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+          node-version: "22"
+
+      - name: Deploy worker (Wrangler static assets)
+        run: npx wrangler@4 deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
