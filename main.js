@@ -159,8 +159,30 @@
 })();
 
 (function () {
-  if (window.location.protocol === "file:") {
-    var hint = document.getElementById("film-youtube-fallback-msg");
-    if (hint) hint.hidden = false;
+  var iframe = document.getElementById("film-youtube-iframe");
+  var hint = document.getElementById("film-youtube-fallback-msg");
+
+  if (window.location.protocol === "file:" && hint) {
+    hint.hidden = false;
   }
+
+  if (!iframe) return;
+
+  var videoId = "zITyA42P0o8";
+  var base = "https://www.youtube.com/embed/" + videoId;
+  var params = new URLSearchParams();
+  params.set("mute", "1");
+  params.set("autoplay", "1");
+  params.set("playsinline", "1");
+  params.set("controls", "1");
+  params.set("rel", "0");
+  params.set("modestbranding", "1");
+  params.set("loop", "1");
+  params.set("playlist", videoId);
+
+  if (window.location.origin && window.location.protocol !== "file:") {
+    params.set("origin", window.location.origin);
+  }
+
+  iframe.src = base + "?" + params.toString();
 })();
