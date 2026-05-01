@@ -1,0 +1,6 @@
+# Limit caching of HTML so Cloudflare Pages + browsers pick up copy updates quickly.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
