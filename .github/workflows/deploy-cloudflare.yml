@@ -7,8 +7,13 @@
 #
 #   CLOUDFLARE_ACCOUNT_ID (required for CI — fixes “exit code 1” / ambiguous account)
 #     Dashboard → Workers & Pages → Workers tab → overview, or any zone → right rail “Account ID”.
+#
+# Node on Actions: opt into Node 24 for JS-based actions (see GitHub deprecation of Node 20).
 
 name: Deploy to Cloudflare Workers
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   push:
@@ -25,10 +30,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Deploy worker (static assets)
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v3.15.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
