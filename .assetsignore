@@ -1,0 +1,3 @@
+# Files under the asset root not to upload (same rules as .gitignore-style)
+.git/
+.github/

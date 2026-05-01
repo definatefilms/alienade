@@ -1,0 +1,7 @@
+# Workers static assets — used when Cloudflare runs `npx wrangler deploy` from Git.
+# Serves index.html, assets/, styles.css, main.js from the repository root.
+name = "alienade"
+compatibility_date = "2025-05-01"
+
+[assets]
+directory = "./"
