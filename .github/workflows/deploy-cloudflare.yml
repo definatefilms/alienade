@@ -1,0 +1,35 @@
+# Deploys on every push to main — no Cloudflare “Git webhook” required.
+#
+# One-time setup (GitHub repo → Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN — Create at Cloudflare Dashboard → My Profile → API Tokens.
+#     Use “Edit Cloudflare Workers” template, or custom with:
+#     Account → Workers Scripts → Edit, Account → Workers KV Storage → Edit (if needed),
+#     User → User Details → Read.
+#
+# If deploy fails with account errors, add to wrangler.toml: account_id = "..."
+# (Dashboard → Workers & Pages → overview shows Account ID).
+
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-cloudflare
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy worker (static assets)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy
