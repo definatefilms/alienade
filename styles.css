@@ -667,6 +667,32 @@ a:hover {
   margin: 0;
 }
 
+.stat--link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.stat--link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  border-color: rgba(196, 240, 49, 0.35);
+}
+
+.stat--link:hover .stat-social-icon {
+  color: var(--lime);
+}
+
+.stat--link:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+
 .stat-social-spacer {
   display: block;
   width: 100%;
@@ -674,31 +700,21 @@ a:hover {
   margin-top: 0.75rem;
 }
 
-.stat-social-link {
+.stat-social-icon {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 0.75rem;
   color: var(--cyan);
   line-height: 0;
-  transition: color 0.15s ease, transform 0.15s ease;
+  transition: color 0.15s ease;
 }
 
-.stat-social-link:hover {
-  color: var(--lime);
-}
-
-.stat-social-link:focus-visible {
-  outline: 2px solid var(--lime);
-  outline-offset: 4px;
-  border-radius: 6px;
-}
-
-.stat-social-link svg {
+.stat-social-icon svg {
   flex-shrink: 0;
 }
 
-.stat dt {
+.stat-label {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -706,7 +722,7 @@ a:hover {
   margin: 0 0 0.35rem;
 }
 
-.stat dd {
+.stat-value {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.5rem;
