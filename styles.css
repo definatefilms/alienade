@@ -805,8 +805,11 @@ a:hover {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: clamp(2rem, 5vw, 3rem);
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pillar {
