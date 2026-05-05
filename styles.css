@@ -335,6 +335,11 @@ a:hover {
   padding: 1.35rem 1.5rem;
 }
 
+.anti-marketing-tagline {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .film-section {
   position: relative;
   z-index: 5;
