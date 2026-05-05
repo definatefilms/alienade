@@ -339,6 +339,7 @@ a:hover {
   position: relative;
   z-index: 5;
   padding-top: clamp(2rem, 7vw, 4.5rem);
+  padding-bottom: clamp(2rem, 6vw, 3.5rem);
 }
 
 .film-embed {
